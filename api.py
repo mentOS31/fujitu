@@ -2,12 +2,9 @@ from flask import Flask, jsonify
  
 app = Flask(__name__)
  
-@app.route('/data/', method=["PUT"])
-def put_user():
-    user = request.json["user_id"]
-    password = request.json["password"]
+@app.route('/')
+def hello_world():
     return jsonify({'message': 'Hello world'})
  
- 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=8888, debug=True)
