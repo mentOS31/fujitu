@@ -1,18 +1,10 @@
-from wsgiref.simple_server import make_server
+from flask import Flask, jsonify
  
-import json
+app = Flask(__name__)
  
+@app.route('/')
+def hello_world():
+    return jsonify({'message': 'Hello world'})
  
-def app(environ, start_response):
-  status = '200 OK'
-  headers = [
-    ('Content-type', 'application/json; charset=utf-8'),
-    ('Access-Control-Allow-Origin', '*'),
-  ]
-  start_response(status, headers)
- 
-  return [json.dumps({'message':'hoge'}).encode("utf-8")]
- 
-with make_server('', 3000, app) as httpd:
-  print("Serving on port 3000...")
-  httpd.serve_forever()
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=8888, debug=True)
